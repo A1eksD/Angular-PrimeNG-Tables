@@ -1,0 +1,133 @@
+<h2>Returns (RxJS)</h2>
+
+<!-- Skeleton: shown as plain table while loading, matching the real table structure -->
+@if (loading()) {
+  <div class="returns-skeleton-wrapper">
+    <table class="returns-skeleton-table">
+      <thead>
+        <tr>
+          @for (col of columns; track col.field) {
+            <th>{{ col.header }}</th>
+          }
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of skeletonRows; track $index) {
+          <tr>
+            @for (col of columns; track col.field) {
+              <td><p-skeleton height="1.2rem" /></td>
+            }
+            <td><p-skeleton height="1.2rem" /></td>
+          </tr>
+        }
+      </tbody>
+      <tfoot>
+        <tr>
+          @for (col of columns; track col.field) {
+            <td>{{ col.header }}</td>
+          }
+          <td>Actions</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+} @else {
+  <p-treetable
+    [value]="nodes"
+    [columns]="columns"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[5, 10, 25]"
+  >
+    <ng-template #header let-columns>
+      <tr>
+        @for (col of columns; track col.field) {
+          <th [ttSortableColumn]="col.field">
+            {{ col.header }}
+            <p-treeTableSortIcon [field]="col.field" />
+          </th>
+        }
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-rowNode let-rowData="rowData" let-columns="columns">
+      <tr
+        [ttRow]="rowNode"
+        [ttSelectableRow]="rowNode"
+        [class.returns-parent-row]="!rowNode.node.parent"
+        [class.returns-child-row]="!!rowNode.node.parent"
+      >
+        @for (col of columns; track col.field; let i = $index) {
+          <td>
+            @if (i === 0) {
+              <p-treeTableToggler [rowNode]="rowNode" />
+            }
+            {{ rowData[col.field] }}
+          </td>
+        }
+        <!-- Actions-Spalte: Edit (PUT) und Delete (DELETE) -->
+        <td class="actions-cell">
+          <p-button
+            icon="pi pi-pencil"
+            severity="info"
+            [text]="true"
+            pTooltip="Edit return (PUT)"
+            (onClick)="onEdit(rowData)"
+          />
+          <p-button
+            icon="pi pi-trash"
+            severity="danger"
+            [text]="true"
+            pTooltip="Delete return (DELETE)"
+            (onClick)="onDelete(rowData)"
+          />
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template #footer let-columns>
+      <tr>
+        @for (col of columns; track col.field) {
+          <td>{{ col.header }}</td>
+        }
+        <td>Actions</td>
+      </tr>
+    </ng-template>
+  </p-treetable>
+}
+
+<!-- Edit Dialog (PUT) -->
+<p-dialog
+  header="Edit Return"
+  [(visible)]="editDialogVisible"
+  [modal]="true"
+  [closable]="true"
+  [dismissableMask]="true"
+  [style]="{ width: '500px' }"
+>
+  <div class="edit-form">
+    @for (col of columns; track col.field) {
+      <div class="edit-field">
+        <label [for]="col.field">{{ col.header }}</label>
+        <input
+          pInputText
+          [id]="col.field"
+          [(ngModel)]="editRow[col.field]"
+          [readonly]="col.field === 'id'"
+        />
+      </div>
+    }
+  </div>
+  <ng-template #footer>
+    <p-button
+      label="Cancel"
+      severity="secondary"
+      [text]="true"
+      (onClick)="editDialogVisible = false"
+    />
+    <!-- Speichern = PUT Request -->
+    <p-button label="Save (PUT)" icon="pi pi-check" (onClick)="saveEdit()" />
+  </ng-template>
+</p-dialog>

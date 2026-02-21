@@ -1,0 +1,14 @@
+<p-button
+  label="Back to Dashboard"
+  icon="pi pi-arrow-left"
+  severity="secondary"
+  [text]="true"
+  routerLink="/dashboard"
+/>
+
+<p-card [header]="segmentName | titlecase">
+  <p>
+    Detail view for the <strong>{{ segmentName }}</strong> category.
+    This page will display data fetched from the backend for this segment.
+  </p>
+</p-card>

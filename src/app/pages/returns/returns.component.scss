@@ -1,0 +1,37 @@
+.returns-skeleton-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.returns-skeleton-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 50rem;
+
+  thead tr th {
+    background: #4b4b4b;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: 1px solid #3a3a3a;
+  }
+
+  tbody tr {
+    background: #dadada;
+
+    td {
+      padding: 0.6rem 1rem;
+      border: 1px solid #cccccc;
+    }
+  }
+
+  tfoot tr td {
+    background: #4b4b4b;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    border: 1px solid #3a3a3a;
+  }
+}

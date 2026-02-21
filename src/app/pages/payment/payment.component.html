@@ -1,0 +1,35 @@
+<h2>Payments</h2>
+<app-dynamic-table [config]="tableConfig" [loading]="loading()" />
+
+<!-- Edit Modal -->
+<p-dialog
+  header="Edit Payment"
+  [(visible)]="editDialogVisible"
+  [modal]="true"
+  [closable]="true"
+  [dismissableMask]="true"
+  [style]="{ width: '500px' }"
+>
+  <div class="edit-form">
+    @for (col of editColumns; track col.field) {
+      <div class="edit-field">
+        <label [for]="col.field">{{ col.header }}</label>
+        <input
+          pInputText
+          [id]="col.field"
+          [(ngModel)]="editRow[col.field]"
+          [readonly]="col.field === 'id'"
+        />
+      </div>
+    }
+  </div>
+  <ng-template #footer>
+    <p-button
+      label="Cancel"
+      severity="secondary"
+      [text]="true"
+      (onClick)="editDialogVisible = false"
+    />
+    <p-button label="Save" icon="pi pi-check" (onClick)="saveEdit()" />
+  </ng-template>
+</p-dialog>

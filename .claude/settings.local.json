@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx ng build)",
+      "Bash(npm ls:*)",
+      "Bash(npx ng test:*)",
+      "Bash(npm install:*)",
+      "WebFetch(domain:primeng.org)",
+      "Bash(npx tsc:*)"
+    ]
+  }
+}

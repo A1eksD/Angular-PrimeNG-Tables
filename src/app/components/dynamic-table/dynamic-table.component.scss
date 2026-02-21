@@ -1,0 +1,41 @@
+.table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.action-cell {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.export-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.export-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.export-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.export-label {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.export-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+}

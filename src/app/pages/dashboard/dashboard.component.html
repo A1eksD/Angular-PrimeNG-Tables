@@ -1,0 +1,13 @@
+<h2>Dashboard</h2>
+
+<p-card header="Revenue by Category">
+  <div class="chart-container">
+    <p-chart
+      type="doughnut"
+      [data]="chartData"
+      [options]="chartOptions"
+      height="500px"
+    />
+  </div>
+  <p class="chart-hint">Click on a segment to view details</p>
+</p-card>
