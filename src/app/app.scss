@@ -1,11 +1,20 @@
-.app-logo {
-  font-weight: 700;
-  font-size: 1.25rem;
-  margin-right: 1rem;
+$sidebar-width: 240px;
+$sidebar-collapsed-width: 64px;
+$transition: 0.28s ease;
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
 }
 
 .app-content {
+  flex: 1;
   padding: 1.5rem;
-  max-width: 1400px;
-  margin: 0 auto;
+  margin-left: $sidebar-collapsed-width;
+  transition: margin-left $transition;
+  min-width: 0; // flex overflow fix
+
+  &.sidebar-open {
+    margin-left: $sidebar-width;
+  }
 }

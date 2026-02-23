@@ -1,0 +1,183 @@
+$sidebar-width: 240px;
+$sidebar-collapsed-width: 64px;
+$sidebar-bg: #2d2d2d;
+$sidebar-text: #d4d4d4;
+$sidebar-active-color: #F0A032;
+$sidebar-hover-bg: rgba(255, 255, 255, 0.07);
+$transition: 0.28s ease;
+
+// ── Sidebar Shell ──────────────────────────────────────────────
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: $sidebar-width;
+  background: $sidebar-bg;
+  color: $sidebar-text;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width $transition, box-shadow $transition;
+  z-index: 1000;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.25);
+
+  &.collapsed {
+    width: $sidebar-collapsed-width;
+  }
+
+  // Hover-expand overlays the content → eigener Shadow
+  &.hover-expanded {
+    width: $sidebar-width;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.45);
+  }
+}
+
+// ── Header / Toggle ────────────────────────────────────────────
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 0.75rem;
+  min-height: 56px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.toggle-btn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: $sidebar-text;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background $transition;
+
+  i {
+    font-size: 0.85rem;
+  }
+
+  &:hover {
+    background: $sidebar-hover-bg;
+  }
+}
+
+.sidebar-brand {
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
+  opacity: 1;
+  transition: opacity $transition;
+
+  // Versteckt wenn collapsed (kein hover)
+  .collapsed:not(.hover-expanded) & {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+// ── Navigation ─────────────────────────────────────────────────
+.sidebar-nav {
+  flex: 1;
+  padding: 0.5rem 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  // Scrollbar dezent
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+  }
+}
+
+// ── Nav Item ──────────────────────────────────────────────────
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  min-height: 48px;
+  gap: 0.5rem;
+  color: $sidebar-text;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background $transition, color $transition;
+  user-select: none;
+
+  &:hover {
+    background: $sidebar-hover-bg;
+  }
+
+  &.active {
+    color: $sidebar-active-color;
+    background: rgba($sidebar-active-color, 0.1);
+  }
+}
+
+.nav-label {
+  flex: 1;
+  font-size: 0.875rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 1;
+  transition: opacity $transition;
+
+  // Labels ausblenden wenn collapsed (kein hover)
+  .collapsed:not(.hover-expanded) & {
+    opacity: 0;
+    width: 0;
+    flex: 0;
+  }
+}
+
+.nav-icon {
+  flex-shrink: 0;
+  font-size: 1.05rem;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.nav-chevron {
+  font-size: 0.7rem;
+  color: rgba($sidebar-text, 0.55);
+  transition: transform $transition;
+}
+
+// ── Children (Returns) ─────────────────────────────────────────
+.nav-children {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+
+  &.open {
+    max-height: 160px;
+  }
+}
+
+.nav-child {
+  padding-left: 2.25rem;
+  font-size: 0.84rem;
+  background: rgba(0, 0, 0, 0.18);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}

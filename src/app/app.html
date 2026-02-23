@@ -1,9 +1,6 @@
-<p-menubar [model]="menuItems">
-  <ng-template #start>
-    <span class="app-logo">Analytics Portal</span>
-  </ng-template>
-</p-menubar>
-
-<main class="app-content">
-  <router-outlet />
-</main>
+<div class="app-layout">
+  <app-sidebar></app-sidebar>
+  <main class="app-content" [class.sidebar-open]="!sidebarCollapsed()">
+    <router-outlet />
+  </main>
+</div>

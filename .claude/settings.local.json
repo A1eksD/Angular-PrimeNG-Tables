@@ -6,7 +6,10 @@
       "Bash(npx ng test:*)",
       "Bash(npm install:*)",
       "WebFetch(domain:primeng.org)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx ng build:*)",
+      "Bash(lsof:*)"
     ]
   }
 }

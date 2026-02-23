@@ -1,0 +1,61 @@
+<aside
+  class="sidebar"
+  [class.collapsed]="!isExpanded()"
+  [class.hover-expanded]="hoverExpanded() && collapsed()"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+>
+  <!-- ── Header ── -->
+  <div class="sidebar-header">
+    <button class="toggle-btn" (click)="toggle()" title="Sidebar ein-/ausklappen">
+      @if (isExpanded()) {
+        <i class="pi pi-chevron-left"></i>
+      } @else {
+        <i class="pi pi-chevron-right"></i>
+      }
+    </button>
+    <span class="sidebar-brand">Analytics Portal</span>
+  </div>
+
+  <!-- ── Navigation ── -->
+  <nav class="sidebar-nav">
+
+    <!-- Dashboard -->
+    <a class="nav-item" routerLink="/dashboard" routerLinkActive="active">
+      <span class="nav-label">Dashboard</span>
+      <i class="pi pi-chart-pie nav-icon"></i>
+    </a>
+
+    <!-- Payments (mit Returns als Child) -->
+    <div class="nav-group">
+      <a
+        class="nav-item"
+        routerLink="/payment"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="togglePayments()"
+      >
+        <span class="nav-label">Payments</span>
+        <div class="nav-right">
+          @if (isExpanded()) {
+            <i
+              class="pi nav-chevron"
+              [class.pi-chevron-down]="paymentsOpen()"
+              [class.pi-chevron-right]="!paymentsOpen()"
+            ></i>
+          }
+          <i class="pi pi-credit-card nav-icon"></i>
+        </div>
+      </a>
+
+      <!-- Returns (Child) -->
+      <div class="nav-children" [class.open]="paymentsOpen() && isExpanded()">
+        <a class="nav-item nav-child" routerLink="/returns" routerLinkActive="active">
+          <span class="nav-label">Returns</span>
+          <i class="pi pi-arrow-circle-left nav-icon"></i>
+        </a>
+      </div>
+    </div>
+
+  </nav>
+</aside>
